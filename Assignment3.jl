@@ -9,14 +9,14 @@ using Revise
  variables = ["X1", "X2", "X3", "X4", "X5", "X6", "X7","X8","X9"]
 
  #Variable domains are the same
-dX1 = dX2 = dX3 = dX4 = dX5 = dX6 = dX7 dX8 = dX9= ["r", "g", "b"]
+dX1 = dX2 = dX3 = dX4 = dX5 = dX6 = dX7 = dX8 = dX9 = ["r", "g", "b"]
 
 #An array of the domains
 dSet = [dX1, dX2, dX3, dX4, dX5, dX6, dX7,dX8,dX9]
 
 #A function that describes the constraints: Returns true if two chosen states are neigbours
  function constrained(a, b)
-        if (a !=b )
+    if (a !=b )
         if (a||b == "X1") && (a||b == "X2")
         return true
       elseif (a||b == "X1") && (a||b == "X3")
@@ -38,14 +38,15 @@ dSet = [dX1, dX2, dX3, dX4, dX5, dX6, dX7,dX8,dX9]
         else
         return false
         end
-        end
-      end
-
-function foward_prop(d,v)
+    end
+end
+      
+#forward checking and propagation function
+function forward_prop(d,v)
   for i in 1:length(d)
     for j in 2:length(v)
-      d[i] =[random[d[i]]]
-      if constrained(v[i], v[j]) == true      #Forward-Check
+      d[i] =[randn([d[i]])]
+      if constrained(v[i], v[j]) == true  #Forward-Check
       d[j] = setdiff(d[j], d[i])
     elseif constrained(v[i], v[j]) == false #propagation
         d[j]  = d[i]
@@ -60,8 +61,6 @@ function foward_prop(d,v)
 end
 
 forward_prop(dSet,variables)
-
-print(forward_prop(v,d,c))
 
 #__________________
 #Question 2
