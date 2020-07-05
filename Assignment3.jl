@@ -2,56 +2,64 @@
 #___________
 #Question 1
 #___________
-function forward_prop(v,d,c)
-    re = []
+using Random
+using Revise
 
-    for i in v
-        for j in d
-            append!(re,Dict(v[1] => d[1]))
-            splice!(d,1)
-            println(re,"  ===>  ",d)
+ #Variables 
+ variables = ["X1", "X2", "X3", "X4", "X5", "X6", "X7","X8","X9"]
 
-            append!(re,Dict(v[2] => d[1]))
-            filter!(e->e≠"g",d)
-            println(re,"  ===>  ",d)
+ #Variable domains are the same
+dX1 = dX2 = dX3 = dX4 = dX5 = dX6 = dX7 dX8 = dX9= ["r", "g", "b"]
 
-            a = ["r","g","b"]
-            append!(re,Dict(v[3] => d[1]))
-            filter!(e->e≠"b",a)
-            println(re,"  ===>  ",a)
+#An array of the domains
+dSet = [dX1, dX2, dX3, dX4, dX5, dX6, dX7,dX8,dX9]
 
-            append!(re,Dict(v[4] => a[1]))
-            filter!(e->e≠"r",a)
-            println(re,"  ===>  ",a)
-
-            b = ["r","g","b"]
-            append!(re,Dict(v[5] => a[1]))
-            filter!(e->e∉["r","g"],b)
-            println(re,"  ===>  ",b)
-
-            append!(re,Dict(v[6] => b[1]))
-            filter!(e->e∉["g","b"],b)
-            println(re,"  ===>  ",b)
-
-            c = ["r","g","b"]
-            append!(re,Dict(v[7] => c[1]))
-            filter!(e->e≠"r",c)
-            println(re,"  ===>  ",c)
-
-            append!(re,Dict(v[8] => c[1]))
-            filter!(e->e≠"g",c)
-            println(re,"  ===>  ",c)
-
-            append!(re,Dict(v[9] => c[1]))
-            break
+#A function that describes the constraints: Returns true if two chosen states are neigbours
+ function constrained(a, b)
+        if (a !=b )
+        if (a||b == "X1") && (a||b == "X2")
+        return true
+      elseif (a||b == "X1") && (a||b == "X3")
+        return true
+      elseif (a||b == "X2") && (a||b == "X3")
+        return true
+      elseif (a||b == "X3") && (a||b == "X4")
+        return true
+      elseif (a||b == "X4") && (a||b == "X5")
+        return true
+      elseif (a||b == "X5") && (a||b == "X6")
+        return true
+      elseif (a||b == "X6") && (a||b == "X7")
+        return true
+      elseif (a||b == "X7") && (a||b == "X8")
+        return true
+      elseif (a||b == "X8") && (a||b == "X9")
+        return true
+        else
+        return false
         end
+        end
+      end
+
+function foward_prop(d,v)
+  for i in 1:length(d)
+    for j in 2:length(v)
+      d[i] =[random[d[i]]]
+      if constrained(v[i], v[j]) == true      #Forward-Check
+      d[j] = setdiff(d[j], d[i])
+    elseif constrained(v[i], v[j]) == false #propagation
+        d[j]  = d[i]
+      end
     end
-    return re
+    println("Current Domains: ", d)
+    if d[i] == []
+      println("There is no solution at element number: ", i)
+    end
+    j = j + 1
+  end
 end
 
-v = ["X1","X2","X3","X4","X5","X6","X7","X8","X9"]
-d = ["r","g","b"]
-c = true
+forward_prop(dSet,variables)
 
 print(forward_prop(v,d,c))
 
