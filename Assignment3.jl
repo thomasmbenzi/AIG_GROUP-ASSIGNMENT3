@@ -1,3 +1,4 @@
+
 #___________
 #Question 1
 #___________
@@ -66,13 +67,13 @@ function simultaneousGame(P1,P2)
     #player 1
     function player1(P1)
         if P1[1] > P1[3] && P1[2] > P1[4]
-            return (a,"a is strictly dominant and b is dominated strategy")
+            return (a,"a is strictly dominant and b is dominated strategy");
         elseif P1[3] > P1[1] && P1[4] > P1[2]
-            return (b,"b is strictly dominant and a is dominated strategy")
+            return (b,"b is strictly dominant and a is dominated strategy");
         elseif P1[1] >= P1[3] && P1[2] >= P1[4]
-            return (a,"a is weakly dominant")
+            return (a,"a is weakly dominant");
         elseif P1[3] >= P1[1] && P1[4] >= P1[2]
-            return (b,"b is a strictly dominant strategy")
+            return (b,"b is a strictly dominant strategy");
         else
             return "P1, does not have a dominant strategy!"
         end # if
@@ -81,13 +82,13 @@ function simultaneousGame(P1,P2)
     #Player 2
     function player2(P2)
         if P2[1] > P2[3] && P2[2] > P2[4]
-            return (a,"In P2, a is strictly dominant and b is dominated strategy")
+            return (a,"In P2, a is strictly dominant and b is dominated strategy");
         elseif P2[3] > P2[1] && P2[4] > P2[2]
-            return (b,"In P2, b is strictly dominant and a is dominated strategy")
+            return (b,"In P2, b is strictly dominant and a is dominated strategy");
         elseif P2[1] >= P2[3] && P2[2] >= P2[4]
-            return (a,"In P2, a is weakly dominant")
+            return (a,"In P2, a is weakly dominant");
         elseif P2[3] >= P2[1] && P2[4] >= P2[2]
-            return (b,"In P2, b is a strictly dominant strategy")
+            return (b,"In P2, b is a strictly dominant strategy");
         else
             return "P2, does not have a dominant strategy!"
         end # if
