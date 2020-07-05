@@ -61,6 +61,7 @@ function forward_prop(d,v)
 end
 
 forward_prop(dSet,variables)
+#end of problem 1
 
 #__________________
 #Question 2
@@ -113,6 +114,7 @@ P1 = [3,2,2,5]
 P2 = [-2,2,3,0]
 
 println(simultaneousGame(P1,P2))
+#end of problem 2
 
 
 #___________
@@ -163,3 +165,4 @@ R = [40,60,80,100]
 y = 0.5
 
 print("Result: ",MDP(S,A,R,y))
+#end of problem 3
